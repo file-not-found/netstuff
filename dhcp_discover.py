@@ -19,10 +19,10 @@ def check_packet(p):
 def print_dhcp(dhcp):
     print "DHCP options:"
     for opt in dhcp.options:
-        if opt[0] != 'pad':
-            if len(opt) == 1:
+        if opt != 'pad' and opt != 'end':
+            if isinstance(opt,str):
                 print "\t%s" % opt
-            if len(opt) == 2:
+            elif len(opt) == 2:
                 print "\t%s: %s" % opt
 
 def send_discover():
