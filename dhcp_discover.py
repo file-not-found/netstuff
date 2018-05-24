@@ -30,10 +30,17 @@ def send_discover():
     ip      = IP(src='0.0.0.0', dst='255.255.255.255') 
     udp     = UDP(dport=67,sport=68)
     bootp   = BOOTP(op=1, xid=0x1337, chaddr=mac_raw[1])
-    req = ''
+
+    #### old version
+    #req = ''
+    #for i in xrange(1,255):
+    #    req += chr(i)
+
+    #### new version
+    req =[]
     for i in xrange(1,255):
-        req += chr(i)
-    #dhcp    = DHCP(options=[('message-type','discover'), ('param_req_list','\x01\x1c\x03\x06'), ('end')])
+        req.append(i)
+
     dhcp    = DHCP(options=[('message-type','discover'), ('param_req_list',req), ('end')])
     discover = eth / ip / udp / bootp / dhcp
     sendp(discover, iface=iface, verbose=0)
