@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IP=`curl -s ifconfig.io`
+echo "address:        $IP"
+whois "$IP" | grep -P '^netname:|^inetnum:|^country:'
